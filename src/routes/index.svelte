@@ -3,31 +3,36 @@
 </script>
 
 <script>
-	import Counter from '$lib/Counter.svelte';
+	import Shortener from '$lib/shortener/shortener.svelte';
+	import { fade, scale } from 'svelte/transition';
+	import { onMount } from 'svelte';
+
+	let isAnimate = false;
+
+	onMount(() => {
+		const animateTime = setTimeout(() => {
+			isAnimate = true;
+		}, 100);
+
+		return () => clearTimeout(animateTime);
+	});
 </script>
 
 <svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+	<title>Saiki Link</title>
+	<meta name="description" content="Saiki Link - Link Shortener" />
 </svelte:head>
 
 <section>
-	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset="svelte-welcome.webp" type="image/webp" />
-				<img src="svelte-welcome.png" alt="Welcome" />
-			</picture>
-		</span>
+	<div class="pt-20 w-full">
+		{#if isAnimate}
+			<h1 in:scale out:fade>Link Shortener</h1>
+		{/if}
 
-		to your new<br />SvelteKit app
-	</h1>
-
-	<h2>
-		try editing <strong>src/routes/index.svelte</strong>
-	</h2>
-
-	<Counter />
+		<div class="pt-5">
+			<Shortener />
+		</div>
+	</div>
 </section>
 
 <style>
@@ -41,21 +46,6 @@
 
 	h1 {
 		width: 100%;
-	}
-
-	.welcome {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
-
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
+		font-weight: bold;
 	}
 </style>
