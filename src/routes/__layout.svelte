@@ -8,7 +8,9 @@
 
 <footer>
 	<p>
-		Built by <a target="_blank" href="https://firmnardians.vercel.app/">firmnardians</a> for everyone.
+		Built by <a class="text-emerald-700" target="_blank" href="https://firmnardians.vercel.app/"
+			>firmnardians</a
+		> for everyone.
 	</p>
 </footer>
 
@@ -33,7 +35,7 @@
 	}
 
 	footer a {
-		font-weight: bold;
+		font-weight: 600;
 	}
 
 	@media (min-width: 480px) {

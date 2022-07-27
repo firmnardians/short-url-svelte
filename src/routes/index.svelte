@@ -20,16 +20,23 @@
 
 <svelte:head>
 	<title>Saiki Link</title>
-	<meta name="description" content="Saiki Link - Link Shortener" />
+	<meta
+		name="description"
+		content="Saiki Link - Fast, simple and open source. URL shortener to create perfect URLs."
+	/>
 </svelte:head>
 
 <section>
-	<div class="pt-20 w-full">
+	<div class="w-full h-screen flex items-center justify-center flex-col">
 		{#if isAnimate}
 			<h1 in:scale out:fade>Link Shortener</h1>
 		{/if}
 
-		<div class="pt-5">
+		{#if isAnimate}
+			<p class="text-slate-600">Fast, simple and open source.</p>
+		{/if}
+
+		<div class="pt-5 w-full">
 			<Shortener />
 		</div>
 	</div>
