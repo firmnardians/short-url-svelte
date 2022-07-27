@@ -18,14 +18,6 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Saiki Link</title>
-	<meta
-		name="description"
-		content="Saiki Link - Fast, simple and open source. URL shortener to create perfect URLs."
-	/>
-</svelte:head>
-
 <section>
 	<div class="w-full h-screen flex items-center justify-center flex-col">
 		{#if isAnimate}

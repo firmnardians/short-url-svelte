@@ -18,7 +18,7 @@
 				});
 
 				// @ts-ignore
-				window.location.href = tempDoc[0]?.original_url;
+				window.location.href = tempDoc.length > 0 ? tempDoc[0]?.original_url : 'http://saiki.link';
 			})
 			.catch((err) => {
 				if (err) {
@@ -29,6 +29,10 @@
 			});
 	});
 </script>
+
+<svelte:head>
+	<title>Redirect URL - Saiki Link</title>
+</svelte:head>
 
 <div class="h-screen flex items-center justify-center">
 	{#if response === null}

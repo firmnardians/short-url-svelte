@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { generateRandomString, urlValidation } from '../../helper/index';
+	import { disabledSaikiDomain, generateRandomString, urlValidation } from '../../helper/index';
 	import Button from '../../components/button/index.svelte';
 	import { quintOut } from 'svelte/easing';
 	import { scale } from 'svelte/transition';
@@ -17,30 +17,37 @@
 	let isHoverSVG: boolean = false;
 	let isCopiedSuccess: boolean = false;
 	let isServerError: boolean = false;
+	let isDomainInvalid: boolean = false;
 
 	function handleSubmit() {
 		isShortUrlSuccess = false;
 		isUrlValid = true;
 		isServerError = false;
+		isDomainInvalid = false;
 
 		const isValid = urlValidation.test(value);
 
 		if (isValid) {
-			url = value;
-			const x = generateRandomString();
-			shortUrl = `saiki.link/${x}`;
+			const checkDomain = disabledSaikiDomain({ url: value });
+			if (checkDomain === 'saiki.link') {
+				isDomainInvalid = true;
+			} else {
+				url = value;
+				const x = generateRandomString();
+				shortUrl = `saiki.link/${x}`;
 
-			createShortUrl({ shortString: x, originalUrl: value })
-				.then(() => {
-					value = '';
-					isShortUrlSuccess = true;
-				})
-				.catch((err) => {
-					if (err) {
-						isShortUrlSuccess = false;
-						isServerError = true;
-					}
-				});
+				createShortUrl({ shortString: x, originalUrl: value })
+					.then(() => {
+						value = '';
+						isShortUrlSuccess = true;
+					})
+					.catch((err) => {
+						if (err) {
+							isShortUrlSuccess = false;
+							isServerError = true;
+						}
+					});
+			}
 		} else {
 			isUrlValid = false;
 		}
@@ -81,19 +88,21 @@
 		/>
 	</div>
 
-	{#if !isUrlValid}
-		<div class="mt-2">
+	<div class="mt-2">
+		{#if !isUrlValid}
 			<small class="text-rose-500">Unable to shorten that link. It is not a valid url.</small>
-		</div>
-	{/if}
+		{/if}
 
-	{#if isServerError}
-		<div class="mt-2">
+		{#if isServerError}
 			<small class="text-rose-500"
 				>Sorry, server error and was unable to complete your request.</small
 			>
-		</div>
-	{/if}
+		{/if}
+
+		{#if isDomainInvalid}
+			<small class="text-rose-500">Sorry, the saiki.link domain cannot be used.</small>
+		{/if}
+	</div>
 </div>
 
 {#if isShortUrlSuccess}

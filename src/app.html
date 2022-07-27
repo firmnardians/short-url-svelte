@@ -1,9 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<title>Link Shortener - Saiki Link</title>
 		<meta charset="utf-8" />
+		<meta
+			name="description"
+			content="Saiki Link - Fast, simple and open source. URL shortener to create perfect URLs."
+		/>
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+		<link rel="canonical" href="http://saiki.link" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="http://saiki.link" />
+		<meta property="og:image" content="https://saiki.link/favicon.png" />
+		<meta name="twitter:card" content="summary" />
+		<meta property="og:title" content="Saiki Link - Link Shortener" />
+		<meta
+			property="og:description"
+			content="Saiki Link - Fast, simple and open source. URL shortener to create perfect URLs."
+		/>
+
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-6N3FBMJR03"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag('js', new Date());
+
+			gtag('config', 'G-6N3FBMJR03');
+		</script>
+
 		%sveltekit.head%
 	</head>
 	<body>

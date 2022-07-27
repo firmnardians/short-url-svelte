@@ -10,7 +10,15 @@
 	<p>
 		Built by <a class="text-emerald-700" target="_blank" href="https://firmnardians.vercel.app/"
 			>firmnardians</a
-		> for everyone.
+		>
+		for everyone.
+	</p>
+
+	<p>
+		Open Source:
+		<a href="https://github.com/firmnardians/saiki-link" class="text-stone-700" target="_blank"
+			>Github</a
+		>
 	</p>
 </footer>
 
@@ -19,7 +27,8 @@
 		flex: 1;
 		display: flex;
 		flex-direction: column;
-		padding: 1rem;
+		padding-left: 1rem;
+		padding-right: 1rem;
 		width: 100%;
 		max-width: 1024px;
 		margin: 0 auto;

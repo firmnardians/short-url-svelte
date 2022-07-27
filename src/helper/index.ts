@@ -4,3 +4,10 @@ export function generateRandomString() {
 }
 
 export const urlValidation = /^(ftp|http|https):\/\/[^ "]+$/;
+
+export function disabledSaikiDomain({ url }: { url: string }) {
+	let domain: any = new URL(url);
+
+	domain = domain.hostname;
+	return domain;
+}
