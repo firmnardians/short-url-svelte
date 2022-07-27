@@ -6,6 +6,7 @@
 	import Icon from '../../assets/svg/icon.svelte';
 	import { fade, fly } from 'svelte/transition';
 	import ClipboardJS from 'clipboard';
+	import { createShortUrl } from '../../service';
 
 	let value: string = '';
 	let url: string = '';
@@ -15,19 +16,31 @@
 	let isUrlValid: boolean = true;
 	let isHoverSVG: boolean = false;
 	let isCopiedSuccess: boolean = false;
+	let isServerError: boolean = false;
 
 	function handleSubmit() {
 		isShortUrlSuccess = false;
 		isUrlValid = true;
+		isServerError = false;
 
 		const isValid = urlValidation.test(value);
 
 		if (isValid) {
 			url = value;
-			value = '';
 			const x = generateRandomString();
 			shortUrl = `saiki.link/${x}`;
-			isShortUrlSuccess = true;
+
+			createShortUrl({ shortString: x, originalUrl: value })
+				.then(() => {
+					value = '';
+					isShortUrlSuccess = true;
+				})
+				.catch((err) => {
+					if (err) {
+						isShortUrlSuccess = false;
+						isServerError = true;
+					}
+				});
 		} else {
 			isUrlValid = false;
 		}
@@ -71,6 +84,14 @@
 	{#if !isUrlValid}
 		<div class="mt-2">
 			<small class="text-rose-500">Unable to shorten that link. It is not a valid url.</small>
+		</div>
+	{/if}
+
+	{#if isServerError}
+		<div class="mt-2">
+			<small class="text-rose-500"
+				>Sorry, server error and was unable to complete your request.</small
+			>
 		</div>
 	{/if}
 </div>
