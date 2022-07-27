@@ -6,7 +6,7 @@
 	import Icon from '../../assets/svg/icon.svelte';
 	import { fade, fly } from 'svelte/transition';
 	import ClipboardJS from 'clipboard';
-	import { createShortUrl } from '../../service';
+	import { createShortUrl } from '../../repository';
 
 	let value: string = '';
 	let url: string = '';
