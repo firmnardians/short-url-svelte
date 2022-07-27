@@ -4,20 +4,23 @@
 	import { quintOut } from 'svelte/easing';
 	import { scale } from 'svelte/transition';
 	import Icon from '../../assets/svg/icon.svelte';
+	import { fade, fly } from 'svelte/transition';
+	import ClipboardJS from 'clipboard';
 
-	// string
 	let value: string = '';
-	let url: String = '';
-	let shortUrl: String = '';
+	let url: string = '';
+	let shortUrl: string = '';
 
-	// boolean
-	let isShortUrlSuccess: Boolean = false;
-	let isUrlValid: Boolean = true;
+	let isShortUrlSuccess: boolean = false;
+	let isUrlValid: boolean = true;
+	let isHoverSVG: boolean = false;
+	let isCopiedSuccess: boolean = false;
 
 	function handleSubmit() {
-		const isValid = urlValidation.test(value);
 		isShortUrlSuccess = false;
 		isUrlValid = true;
+
+		const isValid = urlValidation.test(value);
 
 		if (isValid) {
 			url = value;
@@ -28,6 +31,23 @@
 		} else {
 			isUrlValid = false;
 		}
+	}
+
+	function handleMouseOver() {
+		isHoverSVG = true;
+	}
+
+	function handleMouseOut() {
+		isHoverSVG = false;
+	}
+
+	function handleCopyLink() {
+		let clipboard = new ClipboardJS('#btn-copy');
+		clipboard.on('success', function (e) {
+			e.clearSelection();
+		});
+
+		isCopiedSuccess = true;
 	}
 </script>
 
@@ -80,5 +100,38 @@
 				</div>
 			</div>
 		</div>
+	</div>
+
+	<div class="mt-2">
+		<div class="flex align-center justify-end">
+			<button
+				on:click={handleCopyLink}
+				on:mouseover={handleMouseOver}
+				on:focus={handleMouseOver}
+				on:mouseout={handleMouseOut}
+				on:blur={handleMouseOut}
+				id="btn-copy"
+				data-clipboard-text={shortUrl}
+				class="bg-white-600 hover:bg-emerald-700 active:bg-white-800 text-sm rounded-lg border-2 border-emerald-700 py-3 px-4 w-full md:w-4/12 text-emerald-700 hover:text-white"
+			>
+				<span class="relative">
+					<span class="absolute right-1.5">
+						<Icon name="link" color={isHoverSVG ? '#ffffff' : 'rgb(21 128 61)'} />
+					</span>
+				</span>
+
+				{isCopiedSuccess ? 'Copied' : 'Copy Link'}
+			</button>
+		</div>
+
+		{#if isCopiedSuccess}
+			<div
+				in:fly={{ y: 50, duration: 2000 }}
+				out:fade
+				class="flex align-center justify-start md:justify-end mt-2"
+			>
+				<p class="text-emerald-800">Copied Successfully</p>
+			</div>
+		{/if}
 	</div>
 {/if}
