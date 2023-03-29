@@ -29,12 +29,12 @@
 
 		if (isValid) {
 			const checkDomain = disabledSaikiDomain({ url: value });
-			if (checkDomain === 'saiki.link') {
+			if (checkDomain === 'link.1998s.dev') {
 				isDomainInvalid = true;
 			} else {
 				url = value;
 				const x = generateRandomString();
-				shortUrl = `saiki.link/${x}`;
+				shortUrl = `link.1998s.dev/${x}`;
 
 				createShortUrl({ shortString: x, originalUrl: value })
 					.then(() => {
@@ -100,7 +100,7 @@
 		{/if}
 
 		{#if isDomainInvalid}
-			<small class="text-rose-500">Sorry, the saiki.link domain cannot be used.</small>
+			<small class="text-rose-500">Sorry, the domain cannot be used.</small>
 		{/if}
 	</div>
 </div>

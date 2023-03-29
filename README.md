@@ -2,7 +2,7 @@
 
 URL shortener to create perfect URLs
 
-Let's go: [http://saiki.link](http://saiki.link)
+Let's go: [https://link.1998s.dev](https://link.1998s.dev)
 
 ## Why?
 

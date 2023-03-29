@@ -18,13 +18,13 @@
 				});
 
 				// @ts-ignore
-				window.location.href = tempDoc.length > 0 ? tempDoc[0]?.original_url : 'http://saiki.link';
+				window.location.href = tempDoc.length > 0 ? tempDoc[0]?.original_url : 'https://link.1998s.dev';
 			})
 			.catch((err) => {
 				if (err) {
 					response = false;
 
-					window.location.href = 'http://saiki.link';
+					window.location.href = 'https://link.1998s.dev';
 				}
 			});
 	});
